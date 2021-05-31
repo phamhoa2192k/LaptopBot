@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Laptop-Bot
+    </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+<body>
+    <div class="b-agent-demo">
+
+        <div class="b-agent-demo_header">
+            <div class="b-agent-demo_header-icon">
+                <div class="b-agent-demo_header-icon-align-helper">
+                    <img id="agent-avatar"
+                        src="/images/logo.png">
+                </div>
+            </div>
+            <div class="b-agent-demo_header-wrapper">
+                <div class="b-agent-demo_header-agent-name">Laptop-Bot</div>
+                <div class="b-agent-demo_header-description"></div>
+            </div>
+        </div>
+        <div class="b-agent-demo_result" id="resultWrapper">
+            <table class="b-agent-demo_result-table">
+                <tbody>
+                    <tr>
+                        <td id="result">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <div class="b-agent-demo_input">
+            <form id="agentDemoForm">
+                <input type="text" name="q" id="query" placeholder="Ask something..." autocomplete="off" onfocus="this.value =''">
+            </form>
+        </div>
+    </div>
+</body>
+<script src="/javascripts/script.js"></script>
+</html>
