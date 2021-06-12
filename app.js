@@ -7,6 +7,7 @@ var logger = require("morgan");
 var userRouter = require("./routes/user");
 var queryRouter = require("./routes/query");
 var adminRouter = require("./routes/admin")
+var webhookRouter = require("./routes/webhook")
 var app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -21,5 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", userRouter);
 app.use("/query", queryRouter);
 app.use("/admin", adminRouter)
+app.use("/webhook", webhookRouter)
 
 module.exports = app;

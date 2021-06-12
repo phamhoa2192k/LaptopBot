@@ -9,7 +9,7 @@ query.get("/", (req, res) => {
     executeQueries(PROJECTID, SESSIONID, text, LANGUAGECODE)
         .then(res => res)
         .then(json => res.status(200).send(JSON.stringify({
-            text: json.queryResult.fulfillmentMessages[0].text.text
+            text: json.queryResult.fulfillmentMessages
         })))
 })
 
