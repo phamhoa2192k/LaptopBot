@@ -17,3 +17,11 @@ INSERT INTO `pj`.`laptops` (`id`, `name`, `cpu`, `ram`, `price`, image) VALUES (
 INSERT INTO `pj`.`laptops` (`id`, `name`, `cpu`, `ram`, `price`, image) VALUES ('2', 'Macbook Pro 2020', 'M1', '8BG', '27790000', 'https://macone.vn/wp-content/uploads/2020/11/macbook-air-gold-m1-2020.jpeg');
 INSERT INTO `pj`.`laptops` (`id`, `name`, `cpu`, `ram`, `price`, image) VALUES ('3', 'Macbook Air 2021', 'M1', '8BG', '25490000', 'https://macone.vn/wp-content/uploads/2020/11/macbook-air-gold-m1-2020.jpeg');
 INSERT INTO `pj`.`laptops` (`id`, `name`, `cpu`, `ram`, `price`, image) VALUES ('4', 'Macbook Pro 2021', 'M1', '16BG', '35990000', 'https://macone.vn/wp-content/uploads/2020/11/macbook-air-gold-m1-2020.jpeg');
+
+create table bills(
+id int primary key not null,
+email varchar(255),
+phone varchar(255),
+address varchar(255),
+name varchar(255)
+)
