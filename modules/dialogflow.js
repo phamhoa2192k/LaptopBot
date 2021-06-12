@@ -39,7 +39,7 @@ async function detectIntent(
 }
 
 async function executeQueries(projectId, sessionId, query, languageCode) {
-  // Keeping the context across queries let's us simulate an ongoing conversation with the bot
+  // Keeping the context across queries let's us simulte an ongoing conversation with the bot
   let context;
   let intentResponse;
   try {
@@ -63,6 +63,4 @@ async function executeQueries(projectId, sessionId, query, languageCode) {
   }
   return intentResponse
 }
-
 module.exports = executeQueries
-//executeQueries(projectId, sessionId, query, languageCode);
