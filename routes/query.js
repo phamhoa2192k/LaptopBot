@@ -1,7 +1,7 @@
 const PROJECTID = process.env.PROJECTID
 const SESSIONID = process.env.SESSIONID
 const LANGUAGECODE = process.env.LANGUAGECODE
-const executeQueries = require("../modules/dialogflow.js")
+const executeQueries = require("../modules/detect.js")
 const query = require("express").Router()
 
 query.get("/", (req, res) => {
@@ -14,4 +14,3 @@ query.get("/", (req, res) => {
 })
 
 module.exports = query
-//hello world

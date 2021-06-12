@@ -39,7 +39,6 @@ async function detectIntent(
 }
 
 async function executeQueries(projectId, sessionId, query, languageCode) {
-  // Keeping the context across queries let's us simulte an ongoing conversation with the bot
   let context;
   let intentResponse;
   try {
@@ -51,13 +50,6 @@ async function executeQueries(projectId, sessionId, query, languageCode) {
       context,
       languageCode
     );
-    // console.log('Detected intent');
-    // console.log(
-    //   `Fulfillment Text: ${intentResponse.queryResult.fulfillmentText}`
-    // );
-    // // Use the context from this response for next queries
-    // context = intentResponse.queryResult.outputContexts;
-    // console.log(intentResponse.queryResult.intent.displayName)
   } catch (error) {
     console.log(error);
   }

@@ -24,3 +24,7 @@ function sendMessenger(e){
     .catch(console.log)
 
 }
+
+function update(){
+    fetch("/admin/update")
+}
