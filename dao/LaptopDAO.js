@@ -25,6 +25,18 @@ var LaptopDAO = db.define("laptop", {
 	other: {
 		type: DataTypes.STRING
 	},
+	promotion: {
+		type: DataTypes.STRING
+	},
+	quantity: {
+		type: DataTypes.INTEGER
+	},
+	detail: {
+		type: DataTypes.STRING
+	},
+	company: {
+		type: DataTypes.STRING
+	}
 
 }, {
 	timestamps: false

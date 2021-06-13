@@ -24,4 +24,35 @@ email varchar(255),
 phone varchar(255),
 address varchar(255),
 name varchar(255)
-)
+);
+
+ALTER TABLE laptops
+ADD promotion mediumtext;
+Alter table laptops
+add quantity int;
+Alter table laptops
+add detail mediumtext;
+Alter table laptops
+add detail mediumtext;
+Alter table laptops
+add company varchar(255);
+
+UPDATE `pj`.`laptops` SET `promotion` = 'tặng kèm balo chống sock hoặc chuột không dây tùy chọn', `quantity` = '5' WHERE (`id` = '1');
+UPDATE `pj`.`laptops` SET `promotion` = 'tặng kèm balo chống sock hoặc chuột không dây tùy chọn', `quantity` = '5' WHERE (`id` = '2');
+UPDATE `pj`.`laptops` SET `promotion` = 'tặng kèm balo chống sock hoặc chuột không dây tùy chọn', `quantity` = '5' WHERE (`id` = '3');
+UPDATE `pj`.`laptops` SET `promotion` = 'tặng kèm balo chống sock hoặc chuột không dây tùy chọn', `quantity` = '5' WHERE (`id` = '4');
+
+UPDATE `pj`.`laptops` SET `detail` = 'Pin 8 tiếng cho một ngày dài làm việc. Hiệu năng làm việc vượt trội. Thiết kế mỏng nhẹ, đẳng cấp' WHERE (`id` = '1');
+UPDATE `pj`.`laptops` SET `detail` = 'Pin 8 tiếng cho một ngày dài làm việc. Hiệu năng làm việc vượt trội. Thiết kế mỏng nhẹ, đẳng cấp' WHERE (`id` = '2');
+UPDATE `pj`.`laptops` SET `detail` = 'Pin 8 tiếng cho một ngày dài làm việc. Hiệu năng làm việc vượt trội. Thiết kế mỏng nhẹ, đẳng cấp' WHERE (`id` = '3');
+UPDATE `pj`.`laptops` SET `detail` = 'Pin 8 tiếng cho một ngày dài làm việc. Hiệu năng làm việc vượt trội. Thiết kế mỏng nhẹ, đẳng cấp' WHERE (`id` = '4');
+
+UPDATE `pj`.`laptops` SET `quantity` = '1' WHERE (`id` = '1');
+UPDATE `pj`.`laptops` SET `quantity` = '1' WHERE (`id` = '2');
+UPDATE `pj`.`laptops` SET `quantity` = '0' WHERE (`id` = '3');
+UPDATE `pj`.`laptops` SET `quantity` = '0' WHERE (`id` = '4');
+
+UPDATE `pj`.`laptops` SET `company` = 'Apple' WHERE (`id` = '1');
+UPDATE `pj`.`laptops` SET `company` = 'Apple' WHERE (`id` = '2');
+UPDATE `pj`.`laptops` SET `company` = 'Apple' WHERE (`id` = '3');
+UPDATE `pj`.`laptops` SET `company` = 'Apple' WHERE (`id` = '4');
