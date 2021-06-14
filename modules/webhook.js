@@ -2,7 +2,7 @@ var LaptopDAO = require("../dao/LaptopDAO")
 const Card = require("../model/Card")
 const Text = require("../model/Text")
 
-var BillDAO = require("../dao/BillDao")
+var BillDAO = require("../dao/BillDAO")
 const { Op } = require("sequelize");
 
 module.exports = async function createResponseFulfillment(req) {
