@@ -1,7 +1,6 @@
 var LaptopDAO = require("../dao/LaptopDAO")
 const Card = require("../model/Card")
 const Text = require("../model/Text")
-const TextArray = require("../model/TextArray")
 
 var BillDAO = require("../dao/BillDao")
 const { Op } = require("sequelize");
@@ -141,7 +140,7 @@ module.exports = async function createResponseFulfillment(req) {
 			res = {
 				"fulfillmentMessages": [
 					{
-						"text": new TextArray(["Xin chào, shop có thể giúp gì cho bạn?","Chào bạn, shop có thể giúp gì cho bạn không?","Laptop-Bot xin chào bạn!"])
+						"text": new Text("Xin chào, shop có thể giúp gì cho bạn?")
 	
 					},
 					{
@@ -162,7 +161,7 @@ module.exports = async function createResponseFulfillment(req) {
 			res = {
 				"fulfillmentMessages": [
 					{
-						"text": new TextArray(["Sorry bạn nha, sản phẩm tạm thời đã hết hàng","Ui sản phẩm bạn tìm đã hết hàng rồi"])
+						"text": new Text("Sorry bạn nha, sản phẩm tạm thời đã hết hàng")
 	
 					},
 					{
