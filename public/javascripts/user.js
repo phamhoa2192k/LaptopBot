@@ -1,4 +1,4 @@
-const SERVER = "http://localhost:3000"
+const SERVER = "https://phamhoalaptopbot.herokuapp.com/"
 var query = document.getElementById("query")
 var result = document.getElementById("result")
 var form = document.getElementById("agentDemoForm").addEventListener("submit", sendMessenger)
