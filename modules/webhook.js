@@ -105,7 +105,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(`Một số hình ảnh của máy`)
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image,["Còn hàng không","Màu sản phẩm"])
+					"card": new Card("Laptop", laptop.name, laptop.image,["Còn hàng không","Mua sản phẩm"])
 				}
 
 			]
@@ -132,7 +132,8 @@ module.exports = async function createResponseFulfillment(req) {
 						"text": new Text(`Hiện phẩm còn hàng nhé.`)
 					},
 					{
-						"card": new Card("","","",["Mua sản phẩm"])
+						"card": new Card("Laptop", laptop.name, laptop.image,["Mua sản phẩm"])
+
 					}
 				]
 			}
