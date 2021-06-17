@@ -40,7 +40,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(`Laptop ${laptop.name}`)
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image,["Chi tiết","Còn hàng không","Mua"])
+					"card": new Card("Laptop", laptop.name, laptop.image,["Chi tiết","Còn hàng không","Mua sản phẩm"])
 				},
 				{
 					"text": new Text(`CPU: ${laptop.cpu}, RAM: ${laptop.ram}`)
@@ -119,9 +119,6 @@ module.exports = async function createResponseFulfillment(req) {
 				"fulfillmentMessages": [
 					{
 						"text": new Text(`Nhập tên sản phẩm bạn muốn xem trước nhé`)
-					},
-					{
-						"card": new Card("","","",["Mua"])
 					}
 				]
 			}
@@ -133,6 +130,9 @@ module.exports = async function createResponseFulfillment(req) {
 				"fulfillmentMessages": [
 					{
 						"text": new Text(`Hiện phẩm còn hàng nhé.`)
+					},
+					{
+						"card": new Card("","","",["Mua sản phẩm"])
 					}
 				]
 			}
@@ -160,7 +160,7 @@ module.exports = async function createResponseFulfillment(req) {
 	
 					},
 					{
-						"text": new Text(`Bạn có thể xem hàng, đặt hàng, cũng như tư vấn sản phẩm:`)
+						"text": new Text(`Bạn có thể xem hàng, đặt hàng, cũng như tìm sản phẩm:`)
 					},
 					
 					{
