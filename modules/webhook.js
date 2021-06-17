@@ -40,7 +40,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(`Laptop ${laptop.name}`)
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image,["Chi tiết","Còn hàng không","Mua sản phẩm"])
+					"card": new Card("Laptop", laptop.name, laptop.image,["Chi tiết","Còn hàng không","Mua sản phẩm","Tìm sản phẩm khác"])
 				},
 				{
 					"text": new Text(`CPU: ${laptop.cpu}, RAM: ${laptop.ram}`)
@@ -105,7 +105,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(`Một số hình ảnh của máy`)
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image,["Còn hàng không","Mua sản phẩm"])
+					"card": new Card("Laptop", laptop.name, laptop.image,["Còn hàng không","Chương trình giảm giá","Mua sản phẩm", "Tìm sản phẩm khác"])
 				}
 
 			]
@@ -132,7 +132,7 @@ module.exports = async function createResponseFulfillment(req) {
 						"text": new Text(`Hiện phẩm còn hàng nhé.`)
 					},
 					{
-						"card": new Card("Laptop", laptop.name, laptop.image,["Mua sản phẩm"])
+						"card": new Card("Laptop", laptop.name, laptop.image,["Chương trình giảm giá", "Mua sản phẩm", "Tìm sản phẩm khác"])
 
 					}
 				]
@@ -190,7 +190,7 @@ module.exports = async function createResponseFulfillment(req) {
 	
 					},
 					{
-						"card": new Card("Laptop", laptop.name, laptop.image,[laptop.name])
+						"card": new Card("Laptop", laptop.name, laptop.image,[laptop.name, "Tìm sản phẩm khác"])
 					}
 				]
 			}
