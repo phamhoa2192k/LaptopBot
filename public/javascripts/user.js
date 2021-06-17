@@ -1,4 +1,3 @@
-const SERVER = "https://phamhoalaptopbot.herokuapp.com"
 var query = document.getElementById("query")
 var result = document.getElementById("result")
 var form = document.getElementById("agentDemoForm").addEventListener("submit", sendMessenger)
@@ -12,11 +11,19 @@ function createTextNode(text, type) {
     return node
 }
 
-function createImageNode(img) {
-    let node = document.createElement("img")
-    node.src = img
+function createCardNode(card) {
+    let node = document.createElement("div")
+    let img = document.createElement("img")
+    img.src = card.imageUri
     node.className = "server-response"
-    node.alt = "Anh chua duoc load"
+    img.alt = "Ảnh chưa được load"
+    node.appendChild(img)
+    card.buttons.forEach((value, i) => {
+        let b = document.createElement("button")
+        b.onclick = () => {query.value = value.text}
+        b.innerHTML = value.text
+        node.appendChild(b)
+    })
     return node
 }
 
@@ -25,18 +32,18 @@ function sendMessenger(e) {
     let textQuerry = query.value;
     query.value = ""
     result.appendChild(createTextNode(textQuerry, "user"))
-    fetch(`${SERVER}/query?q=${textQuerry}`)
+    fetch(`/query?q=${textQuerry}`)
         .then(res => res.json())
         .then(json => json.text)
         .then(array => {
             console.log(array)
             array.forEach(value => {
-                if(value.text) result.appendChild(createTextNode(value.text.text[0],"server"))
-                if(value.card) result.appendChild(createImageNode(value.card.imageUri))
+                if (value.text) result.appendChild(createTextNode(value.text.text[0], "server"))
+                if (value.card) result.appendChild(createCardNode(value.card))
             });
             return 0
         })
         .catch(console.log)
-
+        query.focus()
 }
 

@@ -1,9 +1,9 @@
 var LaptopDAO = require("../dao/LaptopDAO")
 const Card = require("../model/Card")
 const Text = require("../model/Text")
-
 var BillDAO = require("../dao/BillDAO")
 const { Op } = require("sequelize");
+let lastSeenLaptop =""
 
 module.exports = async function createResponseFulfillment(req) {
 	let intent = req.queryResult.intent.displayName
@@ -21,6 +21,8 @@ module.exports = async function createResponseFulfillment(req) {
 	}
 	if (intent === "Xem sản phẩm") {
 		let laptopName = req.queryResult.parameters.laptop
+		lastSeenLaptop = laptopName
+
 		var laptop = await LaptopDAO.findOne({ where: { name: laptopName } })
 		if (laptop == null) res = {
 			"fulfillmentMessages": [
@@ -38,7 +40,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(`Laptop ${laptop.name}`)
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image)
+					"card": new Card("Laptop", laptop.name, laptop.image,["Chi tiết","Còn hàng không","Mua"])
 				},
 				{
 					"text": new Text(`CPU: ${laptop.cpu}, RAM: ${laptop.ram}`)
@@ -48,7 +50,8 @@ module.exports = async function createResponseFulfillment(req) {
 		return res
 	}
 	if (intent === "Mua sản phẩm") {
-		let name = req.queryResult.outputContexts[0].parameters.laptop
+
+		let name = req.queryResult.parameters.laptop // req.queryResult.outputContexts[0].parameters.laptop
 		let email = req.queryResult.parameters.email
 		let phone = req.queryResult.parameters.phone
 		let address = req.queryResult.parameters.address['admin-area']
@@ -76,7 +79,7 @@ module.exports = async function createResponseFulfillment(req) {
 		return res;
 	}
 	if (intent === "Giảm giá") {
-		let name = req.queryResult.outputContexts[0].parameters.laptop
+		let name = lastSeenLaptop // req.queryResult.outputContexts[0].parameters.laptop
 		var laptop = await LaptopDAO.findOne({ where: { name: name } })
 		res = {
 			"fulfillmentMessages": [
@@ -88,7 +91,7 @@ module.exports = async function createResponseFulfillment(req) {
 		return res
 	}
 	if (intent === "Thông số sản phẩm") {
-		let name = req.queryResult.outputContexts[0].parameters.laptop
+		let name = lastSeenLaptop // req.queryResult.outputContexts[0].parameters.laptop
 		var laptop = await LaptopDAO.findOne({ where: { name: name } })
 		res = {
 			"fulfillmentMessages": [
@@ -102,7 +105,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(`Một số hình ảnh của máy`)
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image)
+					"card": new Card("Laptop", laptop.name, laptop.image,["Còn hàng không","Màu sản phẩm"])
 				}
 
 			]
@@ -110,7 +113,20 @@ module.exports = async function createResponseFulfillment(req) {
 		return res
 	}
 	if (intent === "Trạng thái sản phẩm") {
-		let name = req.queryResult.outputContexts[0].parameters.laptop
+		let name = lastSeenLaptop // req.queryResult.outputContexts[0].parameters.laptop
+		if(name == "") {
+			res = {
+				"fulfillmentMessages": [
+					{
+						"text": new Text(`Nhập tên sản phẩm bạn muốn xem trước nhé`)
+					},
+					{
+						"card": new Card("","","",["Mua"])
+					}
+				]
+			}
+			return res
+		}
 		var laptop = await LaptopDAO.findOne({ where: { name: name } })
 		if (laptop.quantity > 0) {
 			res = {
@@ -152,7 +168,7 @@ module.exports = async function createResponseFulfillment(req) {
 	
 					},
 					{
-						"card": new Card("Laptop", laptop.name, laptop.image)
+						"card": new Card("Laptop", laptop.name, laptop.image,[laptop.name])
 					}
 				]
 			}
@@ -173,7 +189,7 @@ module.exports = async function createResponseFulfillment(req) {
 	
 					},
 					{
-						"card": new Card("Laptop", laptop.name, laptop.image)
+						"card": new Card("Laptop", laptop.name, laptop.image,[laptop.name])
 					}
 				]
 			}
@@ -185,7 +201,7 @@ module.exports = async function createResponseFulfillment(req) {
 
 				},
 				{
-					"card": new Card("Laptop", laptop.name, laptop.image)
+					"card": new Card("Laptop", laptop.name, laptop.image,[laptop.name])
 				}
 			]
 		}
@@ -202,7 +218,7 @@ module.exports = async function createResponseFulfillment(req) {
 			return num
 		}
 		let sql = {}
-		let ram = req.queryResult.parameters.ram
+		let ram = req.queryResult.parameters.ram.replace("gb", "GB")
 		let cpu = req.queryResult.parameters.cpu
 		let number = getNumber(req.queryResult.parameters.number)
 		let number1 = getNumber(req.queryResult.parameters.number1)
@@ -214,8 +230,8 @@ module.exports = async function createResponseFulfillment(req) {
 		if (number != "") sql = {
 			...sql,
 			price: {
-				gt: number - 2000000,
-				lte: number + 2000000
+				[Op.gt]: number - 2000000,
+				[Op.lte]: number + 2000000
 			}
 		}
 		if (number1 != "" && number2 != "") sql = {
@@ -225,14 +241,21 @@ module.exports = async function createResponseFulfillment(req) {
 				[Op.lt]: Math.max(number1, number2)
 			}
 		}
+		if (number1 == "" && number2 != "") sql = {
+			...sql,
+			price: {
+				[Op.gt]:number2 - 2000000,       // > 6                         // >= 6
+				[Op.lt]: number2 + 2000000
+			}
+		}
 		let data = []
 		let laptop = await LaptopDAO.findAll({ where: sql })
 
-		if (laptop == null) {
+		if (laptop.length == 0) {
 			res = {
-				"fulfillmentMessages": {
+				"fulfillmentMessages": [{
 					"text": new Text("Không có sản phẩm như bạn mong muốn")
-				}
+				}]
 			}
 			return res
 		}
@@ -243,7 +266,7 @@ module.exports = async function createResponseFulfillment(req) {
 					"text": new Text(value.name)
 				},
 				{
-					"card": new Card("Laptop", value.name, value.image)
+					"card": new Card("Laptop", value.name, value.image,[value.name])
 				},
 				{
 					"text": new Text(`CPU: ${value.cpu}, RAM: ${value.ram}`)
