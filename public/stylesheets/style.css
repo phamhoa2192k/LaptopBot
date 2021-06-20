@@ -196,3 +196,10 @@ input {
 .b-agent-demo .server-response img { 
     width: 400px;
 }
+
+.b-agent-demo .server-response button { 
+    width: 300px;
+    border-radius: 10px;
+    font: 400 13.3333px Arial;
+    margin: 10px;
+}
