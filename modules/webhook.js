@@ -63,6 +63,11 @@ async function findLaptop() {
 			[Op.lt]: price2 + 2000000
 		}
 	}
+	cpu = ""
+	ram = ""
+	price1 = ""
+	price2 = ""
+	price = ""
 	await LaptopDAO.findAll({ where: sql, order: Sequelize.literal('rand()'), limit: 1 })
 		.then(lap => {
 			if (lap.length == 0) laptop = null
