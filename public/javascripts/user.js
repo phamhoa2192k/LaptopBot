@@ -17,7 +17,13 @@ function createCardNode(card) {
     img.src = card.imageUri
     node.className = "server-response"
     img.alt = "Ảnh chưa được load"
-    node.appendChild(img)
+    let title = document.createElement("div")
+    title.innerHTML = card.title
+    if(card.imageUri) {
+        node.appendChild(img)
+        node.appendChild(title)
+    }
+
     card.buttons.forEach((value, i) => {
         let b = document.createElement("button")
         b.onclick = () => {query.value = value.text}
@@ -38,7 +44,7 @@ function sendMessenger(e) {
         .then(array => {
             console.log(array)
             array.forEach(value => {
-                if (value.text) result.appendChild(createTextNode(value.text.text[0], "server"))
+                if (value.text) result.appendChild(createTextNode(value.text.text[Math.floor(Math.random() * value.text.text.length)], "server"))
                 if (value.card) result.appendChild(createCardNode(value.card))
             });
             return 0
